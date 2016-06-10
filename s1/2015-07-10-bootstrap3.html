@@ -1,0 +1,263 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Bootstrap3, how to use</title>
+        <meta name="description" content="Bootstrap3, how to use">
+        <meta name="author" content="Florent Machen">
+
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style"
+              content="black-translucent" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0,
+              maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+        <link rel="stylesheet" href="css/reveal.css">
+        <link rel="stylesheet" href="css/theme/league.css" id="theme">
+
+        <link rel="stylesheet" href="lib/css/zenburn.css">
+
+        <script>
+            var link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.type = 'text/css';
+            link.href = window.location.search.match(/print-pdf/gi) ?
+                    'css/print/pdf.css' : 'css/print/paper.css';
+            document.getElementsByTagName('head')[0].appendChild(link);
+        </script>
+
+        <!--[if lt IE 9]>
+        <script src="lib/js/html5shiv.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+        <div class="reveal">
+
+            <div class="slides">
+                <section>
+                    <h1>Bootstrap3</h1>
+                    <p>
+                        <small>Ceci n'est pas une présentation de <a href="#">Florent Machen</a> pour <a
+                                href="http://www.recisio.com">Recisio</a> le 10/07/2015</small>
+                    </p>
+                </section>
+
+                <section>
+                    <h2>Lightning talk</h2>
+                    <p>Présentation rapide et surtout on discute !</p>
+                    <p>NB pour la prochaine fois : penser à la bière et aux meatballs</p>
+                </section>
+
+                <section>
+		            <section>
+		                <h2>"sixty to the five rule"</h2>
+		                <blockquote style="width:100%;text-align:left">
+				            all browsers, all devices, 
+				            <br>do not download more than 60k of HTML, 
+				            <br>do not download more than 60k of JavaScript on initial page load, 
+				            <br>do not download more than 60k of CSS on initial page load, 
+				            <br>make sure all the animations are sixty FPS, 
+				            <br>and make sure that your average latency is .6 seconds.
+		                </blockquote>
+		                <p>Wahbeh Qardaji - front-end engineer and Tech Lead Manager of the G+ stream web team</p>
+		            </section>
+		            <section>
+		                <h2>Ordre de grandeur</h2>
+		                <ul>
+		                	<li>_jquery-2.1.3.min : 84.3Ko</li>
+		                	<li>bootstrap.min.js : 35.5Ko</li>
+		                	<li>bootstrap.min.css : 117.2Ko</li>
+		                </ul>
+		            </section>
+                </section>
+
+                <section>
+                    <h2>Questions ?</h2>
+                    <p>Sur bootstrap si possible</p>
+                    <p><small>Sinon j'en ai ! Il vaut mieux que ce soit les vôtres que les miennes</small></p>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>mobile first</h2>
+                        <p>
+                        	<img src="http://www.prixing.fr/images/product_images/3a4/3a4e2aa6de3f372d3b3b2ef1b480467c.jpg">
+                        	<br>quézac eau
+                    	</p>
+                        <pre class="fragment roll-in"><code data-trim contenteditable>
+col-xs > col-md > col-lg
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h2>container</h2>
+                        <pre><code data-trim contenteditable>
+.container // for a responsive fixed width container
+                        </code></pre>
+                        <pre><code data-trim contenteditable>
+.container-fluid // for a full width container
+                        </code></pre>
+                        <p>C'est la dedans qu'on y met le systeme de grid</p>
+                    </section>
+                    <section>
+                        <h2>row</h2>
+                        <p>
+                        	<img src="http://www.prixing.fr/images/product_images/3a4/3a4e2aa6de3f372d3b3b2ef1b480467c.jpg">
+                        	<br>quézac eau
+                    	</p>
+                        <pre><code data-trim contenteditable>
+.row // WTF moi pas parler comme toi
+                        </code></pre>
+                        <p class="fragment roll-in">If more than 12 columns are placed within a single row, each group of extra columns will, as one unit, wrap onto a new line.</p>
+                    </section>
+                    <section>
+                        <h2>les grilles</h2>
+                        <pre><code data-trim contenteditable>
+div vs .col-XX and .row
+                        </code></pre>
+                        <pre class="fragment roll-in"><code data-trim contenteditable>
+col-xs > col-md > col-lg
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h2>exemple de grille</h2>
+                        <pre><code data-trim contenteditable>
+<!-- Stack the columns on mobile by making one full-width and the other
+half-width -->
+<div class="row">
+  <div class="col-xs-12 col-md-8">.col-xs-12 .col-md-8</div>
+  <div class="col-xs-6 col-md-4">.col-xs-6 .col-md-4</div>
+</div>
+
+<!-- Columns start at 50% wide on mobile and bump up to 33.3% wide on
+desktop -->
+<div class="row">
+  <div class="col-xs-6 col-md-4">.col-xs-6 .col-md-4</div>
+  <div class="col-xs-6 col-md-4">.col-xs-6 .col-md-4</div>
+  <div class="col-xs-6 col-md-4">.col-xs-6 .col-md-4</div>
+</div>
+
+<!-- Columns are always 50% wide, on mobile and desktop -->
+<div class="row">
+  <div class="col-xs-6">.col-xs-6</div>
+  <div class="col-xs-6">.col-xs-6</div>
+</div>
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h2>use condensed</h2>
+                        <pre><code data-trim contenteditable>
+.col-xs, .btn-xs, .table-condensed
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h2>a vs button</h2>
+                        <p>a sert a suivre un lien HTTP en GET</p>
+                        <p>button lance une action mais on ne s'attend pas a changer de page</p>
+                    </section>
+                    <section>
+                        <h2>glyphicon</h2>
+                        <p>pas mal de base, a utiliser en priorité</p>
+                    </section>
+                    <section>
+                        <h2>components</h2>
+                        <p>Cool mais avec modération. Les dropdowns c'est sympa mais relou car tout x2. Page header c'est gros ! ! !</p>
+                        <p>Essayer de wrapper en PHP (ex: Tabs, breadcrumbs, pagination)</p>
+                        <p>Quid navbar ? avec les badges ?</p>
+                    </section>
+                </section>
+
+                <section>
+                    <h2>exemple twig</h2>
+                    <pre><code data-trim contenteditable>
+<div class="col-xs-12">
+    {% for client in clients %}
+        <div class="col-xs-12">
+            <div class="col-xs-3" style="height:300px">
+                <h2>{{ client.info.caption }}</h2>
+            </div>
+            {% if client.program %}
+                <div class="col-xs-3" style="height:300px">
+                    <h3>Active beta: {{ client.program.clv }}</h3>
+                </div>
+                <div class="col-xs-3" style="height:300px">
+                    {{ client.graph }}
+                </div>
+            {% else %}
+                <div class="col-xs-6" style="height:300px">
+                    No active beta
+                </div>
+            {% endif %}
+        </div>
+    {% endfor %}
+</div>
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h2>exemple twig</h2>
+                    <pre><code data-trim contenteditable>
+<div class="col-xs-4" style="height:300px">
+    <h2>{{ client.info.caption }}</h2>
+</div>
+{% if client.program %}
+    <div class="col-xs-4" style="height:300px">
+        <h3>Active beta: {{ client.program.clv }}</h3>
+    </div>
+    <div class="col-xs-3" style="height:300px">
+        {{ client.graph }}
+    </div>
+{% else %}
+    <div class="col-xs-7" style="height:300px">
+        No active beta
+    </div>
+{% endif %}
+                    </code></pre>
+                </section>
+
+                <section>
+                	<h2>D'autres questions ?</h2>
+                </section>
+
+            </div>
+        </div>
+
+        <script src="lib/js/head.min.js"></script>
+        <script src="js/reveal.js"></script>
+        <script>
+
+            // Full list of configuration options available at:
+            // https://github.com/hakimel/reveal.js#configuration
+            Reveal.initialize({
+                controls: true,
+                progress: true,
+                history: true,
+                center: true,
+                transition: 'convex', // none/fade/slide/convex/concave/zoom
+
+                // Optional reveal.js plugins
+                dependencies: [
+                    {src: 'lib/js/classList.js', condition: function() {
+                            return
+                            !document.body.classList;
+                        }},
+                    {src: 'plugin/markdown/marked.js', condition: function() {
+                            return
+                            !!document.querySelector('[data-markdown]');
+                        }},
+                    {src: 'plugin/markdown/markdown.js', condition: function() {
+                            return !!document.querySelector('[data-markdown]');
+                        }},
+                    {src: 'plugin/highlight/highlight.js', async: true, condition:
+                                function() {
+                                    return !!document.querySelector('pre code');
+                                }, callback:
+                                function() {
+                                    hljs.initHighlightingOnLoad();
+                                }},
+                    {src: 'plugin/zoom-js/zoom.js', async: true},
+                    {src: 'plugin/notes/notes.js', async: true}
+                ]
+            });
+        </script>
+    </body>
+</html>

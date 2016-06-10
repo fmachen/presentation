@@ -1,0 +1,486 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Les expressions rationnelles</title>
+        <meta name="description" content="Les expressions rationnelles">
+        <meta name="author" content="Florent Machen">
+
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style"
+              content="black-translucent" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0,
+              maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+        <link rel="stylesheet" href="s1/css/reveal.css">
+        <link rel="stylesheet" href="s1/css/theme/league.css" id="theme">
+
+        <link rel="stylesheet" href="s1/lib/css/zenburn.css">
+
+        <script>
+            var link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.type = 'text/css';
+            link.href = window.location.search.match(/print-pdf/gi) ?
+                    's1/css/print/pdf.css' : 's1/css/print/paper.css';
+            document.getElementsByTagName('head')[0].appendChild(link);
+        </script>
+
+        <!--[if lt IE 9]>
+        <script src="lib/js/html5shiv.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+        <div class="reveal">
+
+            <div class="slides">
+                <section>
+                    <h1>Les expressions rationnelles</h1>
+                    <h2>Encore un langage qui s'apprend</h2>
+                    <p>
+                        <small>Présentation de <a href="#">Florent Machen</a> pour <a
+                                href="http://www.recisio.com">Recisio</a> le 27/05/2016</small>
+                    </p>
+                </section>
+
+                <section>
+                    <section>
+                        <h1>Encore un langage qui s'apprend</h1>
+                        <ul>
+                            <li><pre><code data-trim>
+                                /\w+\[([\w-]+)(?:[*~^$]?=(['"])?(.+?)\1\]/
+                            </code></pre></li>
+                            <li>Exactement comme SQL, CSS, XML, JS</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h1>Manipulation de texte</h1>
+                        <ul>
+                            <li>extraire rapidement des éléments spécifiques</li>
+                            <li>code plus court et plus rapide qu'un équivalent manuel</li>
+                            <li>plus lisible</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h2>Assez de blabla</h2>
+                        <h1>On veut du code</h1>
+                        <p class="fragment roll-in">pas tapper</p>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h1>(Dé)Construction</h1>
+                        <ul>
+                            <li>identidier les classes et les quantifieurs<pre><code data-trim>
+                                [0-9a-f]+
+                            </code></pre></li>
+                            <li>les groupes<pre><code data-trim>
+                                (?:\d{1,3}\.){3}\d{1,3}
+                            </code></pre></li>
+                            <li class="fragment roll-in">et quelques éléments de syntaxes ;)</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h1>Drapeaux</h1>
+                        <ul>
+                            <li>i : Insensible à la casse</li>
+                            <li>g : globale</li>
+                            <li>m : Multi-lignes (^ et $ fonctionnent sur les lignes)</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h1>Les ancres</h1>
+                        <table>
+                            <tr>
+                                <td>^</td>
+                                <td>début de chaine (ou ligne via flag m)</td>
+                            </tr>
+                            <tr>
+                                <td>$</td>
+                                <td>fin de chaine (ou ligne via flag m)</td>
+                            </tr>
+                            <tr>
+                                <td>\b</td>
+                                <td>word Boundary ou bordure de mot</td>
+                            </tr>
+                            <tr>
+                                <td>\B</td>
+                                <td>par extension son opposé</td>
+                            </tr>
+                        </table>
+                    </section>
+                    <section>
+                        <h1>Les ancres (exemples)</h1>
+                        <table>
+                            <tr>
+                                <td>^halo</td>
+                                <td>correspond à "halo" et "halogène" et "halo éclatant", mais pas à "chaloupe" ou "un halo."</td>
+                            </tr>
+                            <tr>
+                                <td>halo$</td>
+                                <td>correspond à "halo", mais ni "halogène", ni "halo éclatant", ni "chaloupe", ni "un halo."</td>
+                            </tr>
+                            <tr>
+                                <td>\bhalo</td>
+                                <td>correspond à "halo", "un halo.", "halo éclatant" et "halogène", mais pas "chaloupe"</td>
+                            </tr>
+                            <tr>
+                                <td>halo\b</td>
+                                <td>correspond à "halo", "un halo." et "halo éclatant", mais ni "halogène" ni "chaloupe"</td>
+                            </tr>
+                        </table>
+                    </section>
+                    <section>
+                        <h1>Les classes</h1>
+                        <table>
+                            <tr>
+                                <td>[aeiouy]</td>
+                                <td>série de possibilités</td>
+                            </tr>
+                            <tr>
+                                <td>[a-z]</td>
+                                <td>plages</td>
+                            </tr>
+                            <tr>
+                                <td>[0-9a-f]</td>
+                                <td>on mixe</td>
+                            </tr>
+                            <tr>
+                                <td>[^0-9a-f]</td>
+                                <td>caractère interdit</td>
+                            </tr>
+                        </table>
+                    </section>
+                    <section>
+                        <h1>Classes prédéfinies</h1>
+                        <table>
+                            <tr>
+                                <td>.</td>
+                                <td>any char</td>
+                            </tr>
+                            <tr>
+                                <td>\d</td>
+                                <td>digit [0-9]</td>
+                            </tr>
+                            <tr>
+                                <td>\w</td>
+                                <td>word [a-z0-9_]</td>
+                            </tr>
+                            <tr>
+                                <td>\s</td>
+                                <td>space</td>
+                            </tr>
+                            <tr>
+                                <td>\D</td>
+                                <td>[^\d]</td>
+                            </tr>
+                            <tr>
+                                <td>\W</td>
+                                <td>[^\w]</td>
+                            </tr>
+                            <tr>
+                                <td>\S</td>
+                                <td>[^\s]</td>
+                            </tr>
+                        </table>
+                    </section>
+                    <section>
+                        <h2>Quantifieurs</h2>
+                        <table>
+                            <tr><th colspan="2">classic</th></tr>
+                            <tr>
+                                <td>?</td>
+                                <td>zéro ou un</td>
+                            </tr>
+                            <tr>
+                                <td>+</td>
+                                <td>au moins un</td>
+                            </tr>
+                            <tr>
+                                <td>*</td>
+                                <td>un nombre quelconque de fois</td>
+                            </tr>
+                            <tr><th colspan="2">curly braces</th></tr>
+                            <tr>
+                                <td>{4}</td>
+                                <td>4 fois</td>
+                            </tr>
+                            <tr>
+                                <td>{4,12}</td>
+                                <td>entre 4 et 12 fois</td>
+                            </tr>
+                            <tr>
+                                <td>{4,}</td>
+                                <td>au moins 4 fois</td>
+                            </tr>
+                            <tr>
+                                <td>{,4}</td>
+                                <td>n'existe pas {0,4}</td>
+                            </tr>
+                        </table>
+                    </section>
+                    <section>
+                        <h1>greedy/lazy quantifiers</h1>
+                        <ul style="width:100%">
+                            <li><pre><code data-trim contenteditable>
+                                <em>foo</em> and <em>bar</em>
+                            </code></pre></li>
+                            <li><pre><code data-trim contenteditable>
+                                <em>(.+)</em>
+                            </code></pre></li>
+                            <li class="fragment roll-in"><pre><code data-trim contenteditable>
+                                <em>(.+?)</em>
+                            </code></pre></li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h1>séquence</h1>
+                        <table>
+                            <tr>
+                                <td>bob|bobby</td>
+                                <td>permet de faire des séquences</td>
+                            </tr>
+                            <tr class="fragment roll-in">
+                                <td>bobby|bob</td>
+                                <td>très différent de l'exemple précédent</td>
+                            </tr>
+                            <tr class="fragment roll-in">
+                                <td>bob(?:by)?</td>
+                                <td>équivalent à l'exemple précédent</td>
+                            </tr>
+                        </table>
+                    </section>
+                    <section>
+                        <h1>Les groupes</h1>
+                        <p>simplement avec des ()</p>
+                        <p>exemple avec 27/05/2016</p>
+                        <table>
+                            <tr>
+                                <td>\d{2}/\d{2}/\d{4}</td>
+                                <td>pas de groupe</td>
+                            </tr>
+                            <tr>
+                                <td>(\d{2}/\d{2}/\d{4})</td>
+                                <td>un groupe : 27/05/2016</td>
+                            </tr>
+                            <tr>
+                                <td>(\d{2})/(\d{2})/(\d{4})</td>
+                                <td>groupe 1: 27, groupe 2: 05, groupe 3: 2016</td>
+                            </tr>
+                            <tr>
+                                <td>((\d{2})/(\d{2})/(\d{4}))</td>
+                                <td>groupe 1: 27/05/2016, groupe 2: 27, groupe 3: 05, groupe 4: 2016</td>
+                            </tr>
+                        </table>
+                    </section>
+                    <section>
+                        <h1>Paramètres nommées</h1>
+                        <p>préfixer le contenu d'un groupe par ?P&lt;name&gt;</p>
+                        <table>
+                            <tr>
+                                <td nowrap>(?P&lt;first&gt;\w)\w+(?P&lt;last&gt;\w)</td>
+                                <td>remplace le groupe 1 par first et le groupe 2 par last</td>
+                            </tr>
+                            <tr>
+                                <td nowrap>(?P&lt;quote&gt;['"])\w+(?P=quote)</td>
+                                <td>remplace le groupe 1 par first et le groupe 2 par last</td>
+                            </tr>
+                        </table>
+                    </section>
+                    <section>
+                        <h1>backrefs</h1>
+                        <table>
+                            <tr>
+                                <td nowrap>/(\d{2})\/(\d{2})\/(\d{4})/, '$3-$2-$1'</td>
+                                <td nowrap>changement date</td>
+                            </tr>
+                        </table>
+                        <table class="fragment roll-in">
+                            <tr>
+                                <td nowrap>(['"]).+?\1</td>
+                                <td>version pourrie: '.+?'|".+?", ou encore ['"].+['"]</td>
+                            </tr>
+                        </table>
+                    </section>
+                    <section>
+                        <h1>Groupes non capturants</h1>
+                        <p>préfixer le contenu d'un groupe par ?:</p>
+                        <table>
+                            <tr>
+                                <td>([A-Z]{2})(?:\.\d+)+([A-Z])</td>
+                                <td>Alors ? Qu'est ce que ça fait ?</td>
+                            </tr>
+                        </table>
+                    </section>
+                    <section>
+                        <h1>Combo</h1>
+                        <table>
+                            <tr>
+                                <td nowrap>^h[ea]llo w(?:orld|elt)$</td>
+                                <td class="fragment roll-in">"hello world", "hallo welt", "hello welt", "hallo world" et c'est tout</td>
+                            </tr>
+                            <tr>
+                                <td nowrap class="fragment roll-in">/^[^@]+@[a-z]+(\.[a-z]+)+$/m</td>
+                                <td class="fragment roll-in">\nfoo@bar.com\nbaz@qux.co.uk\n</td>
+                            </tr>
+                       </table>
+                    </section>
+                    <section>
+                        <h1>lookaheads</h1>
+                        <p>Permet de définir une condition sur la suite du texte. positive lookahead via ?= et negative lookahead via ?!</p>
+                        <table>
+                            <tr>
+                                <td>\d(?=\d\d)</td>
+                                <td>"2" dans "237" ou "243"<br>mais pas dans "24M", "2", "2TZ" ou "2T4"</td>
+                            </tr>
+                            <tr>
+                                <td>\d(?!\d)</td>
+                                <td>"2" dans "2", "2TZ" ou "2T4"<br>mais pas dans "237", "243" ou "24M"</td>
+                            </tr>
+                        </table>
+                        <pre class="fragment roll-in"><code>replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1 ")</code></pre>
+                        <p class="fragment roll-in">Alors ? Qu'est ce que ça fait ?</p>
+                    </section>
+                    <section>
+                        <h1>Lookbehinds</h1>
+                        <p>Permet de définir une condition sur ce qui précède. positive via ?&lt;= et negative via ?&lt;!</p>
+                        <table>
+                            <tr>
+                                <td>(?&lt;=\*)\w+(?=\*)</td>
+                                <td>you *keep* it a *secret*!</td>
+                            </tr>
+                            <tr>
+                                <td class="fragment roll-in">\b</td>
+                                <td class="fragment roll-in">(?&lt;=\W)(?=\w)|(?&lt;=\w)(?=\W)</td>
+                            </tr>
+                        </table>
+                    </section>
+                    <section>
+                        <h1>Comments</h1>
+                        <ul style="width:100%">
+                            <li><pre><code data-trim>
+[a-z]+ # one or more lower case char 
+\      # and a single space 
+[0-8]  # Followed by a int between 0 and 8 
+                            </code></pre></li>
+                        </ul>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h1>rappel</h1>
+                        <table>
+                            <tr>
+                                <th>regex</th>
+                                <th>sens</th>
+                            </tr>
+                            <tr>
+                                <td>[0-9a-f]+</td>
+                                <td class="fragment roll-in">Nombre entier hexadécimal</td>
+                            </tr>
+                            <tr>
+                                <td>(['"]).*?\1</td>
+                                <td class="fragment roll-in">Chaîne de caractères</td>
+                            </tr>
+                            <tr>
+                                <td>[\w\.-]+@[\w-]+\.\w{3,6}</td>
+                                <td class="fragment roll-in">E-mail</td>
+                            </tr>
+                            <tr>
+                                <td>[\w-]+(\.[\w-]+){1,}</td>
+                                <td class="fragment roll-in">nom de domaine</td>
+                            </tr>
+                        </table>
+                    </section>
+                    <section>
+                        <h1>rappel 2</h1>
+                        <table>
+                            <tr>
+                                <th>regex</th>
+                                <th>sens</th>
+                            </tr>
+                            <tr>
+                                <td><[^>]+></td>
+                                <td class="fragment roll-in">Balise XML</td>
+                            </tr>
+                            <tr>
+                                <td>&(lt|gt|apos|quot|amp);</td>
+                                <td class="fragment roll-in">Échappement XML</td>
+                            </tr>
+                            <tr>
+                                <td>(?:\d{1,3}\.){3}\d{1,3}</td>
+                                <td class="fragment roll-in">IP</td>
+                            </tr>
+                        </table>
+                    </section>
+                    <section>
+                        <h1>rappel 3</h1>
+                        <table>
+                            <tr>
+                                <th>regex</th>
+                                <th>sens</th>
+                            </tr>
+                            <tr>
+                                <td>(?:(?:1?\d{1,2}|2[0-4]\d|25[0-5])\.){3}(?:1?\d{1,2}|2[0-4]\d|25[0-5])</td>
+                                <td class="fragment roll-in">IP</td>
+                            </tr>
+                            <tr>
+                                <td>[a-z]+://[^:/]+(?::\d+)?(?:/[^?]+)?(?:\?[^#]+)?(?:#.+)?</td>
+                                <td class="fragment roll-in">URL</td>
+                            </tr>
+                        </table>
+                    </section>
+                </section>
+
+                <section>
+                    <h1>Quand ne pas utiliser les regex</h1>
+                    <ul>
+                        <li>traitement basique (position dans le texte, remplacement brut, ...)</li>
+                        <li>traitement trop compliqué (navigation dans le texte, document structuré ...)</li>
+                    </ul>
+                </section>
+            </div>
+        </div>
+
+        <script src="s1/lib/js/head.min.js"></script>
+        <script src="s1/js/reveal.js"></script>
+        <script>
+
+            // Full list of configuration options available at:
+            // https://github.com/hakimel/reveal.js#configuration
+            Reveal.initialize({
+                controls: true,
+                progress: true,
+                history: true,
+                center: true,
+                transition: 'convex', // none/fade/slide/convex/concave/zoom
+
+                // Optional reveal.js plugins
+                dependencies: [
+                    {src: 's1/lib/js/classList.js', condition: function() {
+                            return
+                            !document.body.classList;
+                        }},
+                    {src: 's1/plugin/markdown/marked.js', condition: function() {
+                            return
+                            !!document.querySelector('[data-markdown]');
+                        }},
+                    {src: 's1/plugin/markdown/markdown.js', condition: function() {
+                            return !!document.querySelector('[data-markdown]');
+                        }},
+                    {src: 's1/plugin/highlight/highlight.js', async: true, condition:
+                                function() {
+                                    return !!document.querySelector('pre code');
+                                }, callback:
+                                function() {
+                                    hljs.initHighlightingOnLoad();
+                                }},
+                    {src: 's1/plugin/zoom-js/zoom.js', async: true},
+                    {src: 's1/plugin/notes/notes.js', async: true}
+                ]
+            });
+        </script>
+    </body>
+</html>

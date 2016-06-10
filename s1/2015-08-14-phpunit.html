@@ -1,0 +1,172 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>PHPUnit dans le framework Recisio</title>
+        <meta name="description" content="PHPUnit dans le framework Recisio">
+        <meta name="author" content="Florent Machen">
+
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style"
+              content="black-translucent" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0,
+              maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+        <link rel="stylesheet" href="css/reveal.css">
+        <link rel="stylesheet" href="css/theme/league.css" id="theme">
+
+        <link rel="stylesheet" href="lib/css/zenburn.css">
+
+        <script>
+            var link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.type = 'text/css';
+            link.href = window.location.search.match(/print-pdf/gi) ?
+                    'css/print/pdf.css' : 'css/print/paper.css';
+            document.getElementsByTagName('head')[0].appendChild(link);
+        </script>
+
+        <!--[if lt IE 9]>
+        <script src="lib/js/html5shiv.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+        <div class="reveal">
+
+            <div class="slides">
+                <section>
+                    <h1>PHPUnit</h1>
+                    <h2>dans le framework Recisio</h2>
+                    <p>
+                        <small>Présentation de <a href="#">Florent Machen</a> pour <a
+                                href="http://www.recisio.com">Recisio</a> le 14/08/2015</small>
+                    </p>
+                </section>
+
+	            <section>
+	                <h2>Utiliser PHPUnit pour le framework Recisio</h2>
+	            </section>
+
+	            <section>
+	                <h2>Writing Tests</h2>
+	                <ul>
+	                	<li>@group ?</li>
+	                </ul>
+	            </section>
+
+                <section>
+                    <h2>Result</h2>
+                    <ul>
+		            	<li><code style="color:red">.</code>: test succeeds</li>
+		            	<li><code style="color:red">F</code>: assertion fails while running the test method</li>
+		            	<li><code style="color:red">E</code>: error occurs while running the test method</li>
+		            	<li><code style="color:red">R</code>: test has been marked as risky</li>
+		            	<li><code style="color:red">S</code>: test has been skipped</li>
+		            	<li><code style="color:red">I</code>: test is marked as being incomplete or not yet implemented</li>
+                    <ul>
+                </section>
+
+                <section>
+                    <h2>Fixtures</h2>
+                    <ul>
+		            	<li>setUp() / tearDown()</li>
+		            	<li>setUpBeforeClass() / tearDownAfterClass()</li>
+                    <ul>
+                </section>
+
+                <section>
+                    <h2>Global State</h2>
+                    <ul>
+                    	<li>
+		                	It is hard to test code coupled strongly with a global variable and cannot control creation.
+		                	<br>(change to a global variable might break another test)
+                    	</li>
+                    	<li>What's a global variable ?
+			                <ul>
+				            	<li>global variable ($GLOBALS['variable'], global $variable)</li>
+				            	<li>super global ($_ENV, $_POST, $_GET, $_COOKIE, $_SERVER)</li>
+				            	<li>static</li>
+				            	<li>singleton</li>
+				            </ul>
+                    	</li>
+                    <ul>
+                </section>
+
+                <section>
+                    <h2>Risky Tests</h2>
+                    <ul>
+                    	<li>Useless Tests (--report-useless-tests)</li>
+                    	<li>Unintentionally Covered Code (--strict-coverage)</li>
+                    	<li>Output During Test Execution (--disallow-test-output)</li>
+                    	<li>Test Execution Timeout (--enforce-time-limit)</li>
+                    	<li>Global State Manipulation (--strict-global-state)</li>
+                    <ul>
+                </section>
+
+                <section>
+                    <h2>Incomplete and Skipped Tests</h2>
+                    <ul>
+                    	<li><pre><code>$this->markTestIncomplete('This test has not been implemented yet.');</code></pre></li>
+                    	<li><pre><code>$this->markTestSkipped('The MySQLi extension is not available.');</code></pre></li>
+                    	<li><pre><code>Skip using @requires</code></pre></li>
+                    <ul>
+                </section>
+
+                <section>
+                    <h2>Déjà constaté</h2>
+                    <ul>
+                    	<li>Donne un cas d'utilisation avant de coder</li>
+                    	<li>Donne envie/l'occasion de revoir le code</li>
+                    <ul>
+                </section>
+
+				<section>
+					<h2>Sources</h2>
+                    <ul>
+                    	<li><a href="https://netbeans.org/kb/docs/php/phpunit.html">https://netbeans.org/kb/docs/php/phpunit.html</a></li>
+                    	<li><a href="https://phpunit.de/manual/4.8/en/index.html">https://phpunit.de/manual/4.8/en/index.html</a></li>
+                    <ul>
+				</section>
+            </div>
+        </div>
+
+        <script src="lib/js/head.min.js"></script>
+        <script src="js/reveal.js"></script>
+        <script>
+
+            // Full list of configuration options available at:
+            // https://github.com/hakimel/reveal.js#configuration
+            Reveal.initialize({
+                controls: true,
+                progress: true,
+                history: true,
+                center: true,
+                transition: 'convex', // none/fade/slide/convex/concave/zoom
+
+                // Optional reveal.js plugins
+                dependencies: [
+                    {src: 'lib/js/classList.js', condition: function() {
+                            return
+                            !document.body.classList;
+                        }},
+                    {src: 'plugin/markdown/marked.js', condition: function() {
+                            return
+                            !!document.querySelector('[data-markdown]');
+                        }},
+                    {src: 'plugin/markdown/markdown.js', condition: function() {
+                            return !!document.querySelector('[data-markdown]');
+                        }},
+                    {src: 'plugin/highlight/highlight.js', async: true, condition:
+                                function() {
+                                    return !!document.querySelector('pre code');
+                                }, callback:
+                                function() {
+                                    hljs.initHighlightingOnLoad();
+                                }},
+                    {src: 'plugin/zoom-js/zoom.js', async: true},
+                    {src: 'plugin/notes/notes.js', async: true}
+                ]
+            });
+        </script>
+    </body>
+</html>
