@@ -1,0 +1,108 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Title</title>
+    <meta name="description" content="Description">
+    <meta name="author" content="Florent Machen">
+
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style"
+          content="black-translucent"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,
+              maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+    <link rel="stylesheet" href="s1/css/reveal.css">
+    <link rel="stylesheet" href="s1/css/theme/league.css" id="theme">
+
+    <link rel="stylesheet" href="s1/lib/css/zenburn.css">
+
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ?
+                's1/css/print/pdf.css' : 's1/css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+<body>
+<div class="reveal">
+
+    <div class="slides">
+        <section>
+            <h1>H1</h1>
+            <h2>H2</h2>
+            <p>
+                <small>Présentation de <a href="#">Florent Machen</a> pour <a
+                        href="http://www.recisio.com">Recisio</a> le 27/05/2016
+                </small>
+            </p>
+        </section>
+
+        <section>
+            <section>
+                <h1>Encore un langage qui s'apprend</h1>
+                <ul>
+                    <li><pre><code data-trim>
+                                /\w+\[([\w-]+)(?:[*~^$]?=(['"])?(.+?)\1\]/
+                            </code></pre>
+                    </li>
+                    <li>Exactement comme SQL, CSS, XML, JS</li>
+                </ul>
+            </section>
+        </section>
+
+    </div>
+</div>
+
+<script src="s1/lib/js/head.min.js"></script>
+<script src="s1/js/reveal.js"></script>
+<script>
+
+    // Full list of configuration options available at:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+        transition: 'convex', // none/fade/slide/convex/concave/zoom
+
+        // Optional reveal.js plugins
+        dependencies: [
+            {
+                src: 's1/lib/js/classList.js', condition: function () {
+                return
+                !document.body.classList;
+            }
+            },
+            {
+                src: 's1/plugin/markdown/marked.js', condition: function () {
+                return
+                !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 's1/plugin/markdown/markdown.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 's1/plugin/highlight/highlight.js', async: true, condition: function () {
+                return !!document.querySelector('pre code');
+            }, callback: function () {
+                hljs.initHighlightingOnLoad();
+            }
+            },
+            {src: 's1/plugin/zoom-js/zoom.js', async: true},
+            {src: 's1/plugin/notes/notes.js', async: true}
+        ]
+    });
+</script>
+</body>
+</html>
