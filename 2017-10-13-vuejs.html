@@ -312,12 +312,380 @@ new Vue({
                     </table>
                 </section>
 
-    
+            </section>
 
+            <section>
+                <section>
+                    <h2>Les utilitaires</h2>
+                </section>
 
+                <section>
+                    <h2>Raccourcis pour les directives</h2>
+                    <ul>
+                        <li>v-on:click devient @click</li>
+                        <li>v-bind:class devient :class</li>
+                        <li>... v-show, v-if, v-else, v-for ...</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Raccourcis pour les événements</h2>
+                    <ul>
+                        <li>On peut ajouter aux événements des modificateurs
+                            <ul>
+                                <li>.stop : stoppe la propagation</li>
+                                <li>.prevent : empêche l'action implicite</li>
+                                <li>.capture : utilise le mode capture</li>
+                                <li>.self : la cible doit être l'élément lui-même</li>
+                                <li>.once : déclenche une seule fois</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <pre><code><form @submit.stop.prevent="onSubmit"></form></code></pre>
+                </section>
+
+                <section>
+                    <h2>Raccourcis du clavier</h2>
+                    <pre><code><input @keydown.13="submit"></form></code></pre>
+                    <pre><code><input @keydown.enter="submit"></code></pre>
+                    <p>enter, tab, delete, esc, space, up, down, left, right</p>
+                    <pre><code>Vue.config.keyCodes.f1 = 112</code></pre>
+                    <pre><code><!-- Alt + C -->
+<input @keyup.alt.67="clear"></code></pre>
+                </section>
+
+                <section>
+                    <h2>Les boucles</h2>
+                    <table>
+                        <tr>
+                            <td style="max-width:50%">
+    <pre><code>
+&lt;div id="vm6">&gt;
+&lt;li v-for="value in items"&gt;
+    {{ value }}
+&lt;/li&gt;
+&lt;/div&gt;
+    </code></pre>
+    <pre><code>
+new Vue({
+    el: '#vm6',
+    data: {
+        items: [
+        "item 1",
+        "item 2",
+        "item 3"
+        ]
+    }
+});          
+    </code></pre>
+                            </td>
+                            <td style="width:50%; background:rgb(78, 136, 175)">
+<div id="vm6">
+    <li v-for="value in items">
+        {{ value }}
+    </li>
+</div>
+<script>
+new Vue({
+    el: '#vm6',
+    data: {    
+        items: [
+            "item 1",
+            "item 2",
+            "item 3"
+        ]
+    }
+});        
+</script>
+                            </td>
+                        </tr>
+                    </table>
+                </section>
+
+                <section>
+                    <h2>Les boucles avec index</h2>
+                    <table>
+                        <tr>
+                            <td style="max-width:50%">
+    <pre><code>
+&lt;div id="vm7">&gt;
+&lt;li v-for="(value, index) in fruits"
+    @click="getFruit(index)"&gt;
+    {{ index }} => {{ value }}
+&lt;/li&gt;
+&lt;/div&gt;
+    </code></pre>
+    <pre><code>
+new Vue({
+    el: '#vm7',
+    data: {
+        fruits: [
+            'pomme', 'cerise', 'abricot'
+        ]
+    },
+    methods: {
+        getFruit: function(index) {
+            alert('Je suis ' + this.fruits[index]);
+        }
+    }
+});  
+    </code></pre>
+                            </td>
+                            <td style="width:50%; background:rgb(78, 136, 175)">
+<div id="vm7">
+    <li v-for="(value, index) in fruits"
+        @click="getFruit(index)">
+        {{ index }} => {{ value }}
+    </li>
+</div>
+<script>
+new Vue({
+    el: '#vm7',
+    data: {
+        fruits: [
+            'pomme', 'cerise', 'abricot'
+        ]
+    },
+    methods: {
+        getFruit: function(index) {
+            alert('Je suis ' + this.fruits[index]);
+        }
+    }
+});  
+</script>
+                            </td>
+                        </tr>
+                    </table>
+                </section>
+
+                <section>
+                    <h2>Les boucles avec objet</h2>
+                    <table>
+                        <tr>
+                            <td style="max-width:50%">
+    <pre><code>
+var vm = new Vue({
+    el: '#vm8',
+    data: {
+      personnes: [
+        {nom: "Durand", prenom: "Jacques"},
+        {nom: "Dupont", prenom: "Albert"},
+        {nom: "Martin", prenom: "Denis"},
+      ]
+    }
+  });
+  
+  setTimeout(function(){vm.personnes...});  
+    </code></pre>
+                            </td>
+                            <td style="width:50%; background:rgb(78, 136, 175)">
+<div id="vm8">
+    <table class="table table-bordered">
+        <caption>Personnes</caption>
+        <thead>
+          <tr>
+           <th>Nom</th>
+           <th>Prénom</th>
+          </tr>
+        </thead>
+        <tbody id="tuto">
+          <tr v-for="personne in personnes">
+            <td>{{ personne.nom }}</td>
+            <td>{{ personne.prenom }}</td>   
+          </tr>  
+        </tbody>       
+      </table>
+      </div>
+<script>
+var vm = new Vue({
+    el: '#vm8',
+    data: {
+      personnes: [
+        {nom: "Durand", prenom: "Jacques"},
+        {nom: "Dupont", prenom: "Albert"},
+        {nom: "Martin", prenom: "Denis"},
+      ]
+    }
+  });
+  
+  setTimeout(function(){vm.personnes.push({nom: "Claret", prenom: "Marcel"});}, 2000);
+  setTimeout(function(){vm.personnes.pop();}, 4000);
+  setTimeout(function(){vm.personnes.unshift({nom: "Claret", prenom: "Marcel"});}, 6000);
+  setTimeout(function(){vm.personnes.shift();}, 8000);
+  setTimeout(function(){vm.personnes.splice(1, 1, {nom: "Claret", prenom: "Marcel"});}, 10000);
+  setTimeout(function(){vm.personnes.sort(function (a, b) { return (a.nom > b.nom) });}, 12000);
+  setTimeout(function(){vm.personnes.reverse();}, 14000);  
+</script>
+                            </td>
+                        </tr>
+                    </table>
+                </section>
 
             </section>
 
+            <section>
+                <section>
+                    <h2>Double liaison</h2>
+                    <ul>
+                        <li>Si on change quelque chose dans la vue, comment modifier le modèle.</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>directive v-model</h2>
+                    <table>
+                        <tr>
+                            <td style="width:50%">
+    <pre><code>
+&lt;form id="vm9">&gt;
+    &lt;input type="text" v-model="foobar"&gt;
+    &lt;p&gt;{{ foobar }}&lt;/p&gt;
+&lt;/form&gt;
+    </code></pre>
+    <pre><code>
+new Vue({
+    el: '#vm9',
+    data: { foobar: coucou }
+});
+setInterval(function(){ vm.foobar = 'Nouveau texte'; }, 5000);
+    </code></pre>
+                            </td>
+                            <td style="width:50%; background:rgb(78, 136, 175)">
+<form id="vm9">
+    <input type="text" v-model="foobar">
+    <p>{{ foobar }}</p>
+</form>
+<script>
+var vm9 = new Vue({
+    el: '#vm9',
+    data: { foobar: "coucou" }
+});
+setInterval(function(){ vm9.foobar = 'Nouveau texte'; }, 5000);
+</script>
+                            </td>
+                        </tr>
+                    </table>
+                </section>
+            </section>
+                    
+            <section>
+                    <section>
+                <h2>option computed</h2>
+                <table>
+                    <tr>
+                        <td style="width:50%">
+<pre><code>
+&lt;div id="vm10">&gt;
+&lt;p&gt;nom complet : {{ fullname }}&lt;/p&gt;
+&lt;/div&gt;
+</code></pre>
+<pre><code>
+new Vue({
+    el: '#vm10',
+    data: {
+        person: {lastname: "Foo", firstname: "Bar"}
+    },
+    computed: {
+        fullname: function() {
+            return this.person.lastname + 
+                ' ' + this.person.firstname; 
+        }    
+    }
+});      
+</code></pre>
+                        </td>
+                        <td style="width:50%; background:rgb(78, 136, 175)">
+<div id="vm10">
+<p>nom complet : {{ fullname }}</p>
+</div>
+<script>
+var vm10 = new Vue({
+    el: '#vm10',
+    data: {
+        person: {lastname: "Foo", firstname: "Bar"}
+    },
+    computed: {
+        fullname: function() {
+            return this.person.lastname + ' ' + this.person.firstname; 
+        }    
+    }
+});      
+</script>
+                        </td>
+                    </tr>
+                </table>
+        </section>
+
+        <section>
+            <h2>option computed v2</h2>
+            <table>
+                <tr>
+                    <td style="width:50%">
+<pre><code>
+var vm11 = new Vue({
+    el: '#vm11',
+    data: {
+        person: {lastname: "Foo", firstname: "Bar"}
+    },
+    computed: {
+        fullname: {
+            get: function () {
+                return this.person.lastname 
+                    + ' ' + this.person.firstname; 
+            },
+            set: function (value) {
+                var nom = value.split(' ');
+                this.person.lastname = nom[0];
+                this.person.firstname = nom[1];
+            }
+        }
+        }
+    });      
+</code></pre>
+                    </td>
+                    <td style="width:50%; background:rgb(78, 136, 175)">
+<form id="vm11">
+    <div class="form-group">
+        <input type="texte" class="form-control" v-model="fullname">
+    </div>
+    <p>Le nom est : {{ person.lastname }}</p>
+    <p>Le prénom est : {{ person.firstname }}</p>
+</form>
+<script>
+var vm11 = new Vue({
+el: '#vm11',
+data: {
+    person: {lastname: "Foo", firstname: "Bar"}
+},
+computed: {
+    fullname: {
+        get: function () {
+           return this.person.lastname + ' ' + this.person.firstname; 
+        },
+        set: function (value) {
+            var nom = value.split(' ');
+            this.person.lastname = nom[0];
+            this.person.firstname = nom[1];
+        }
+    }
+    }
+});      
+</script>
+                    </td>
+                </tr>
+            </table>
+        </section>
+
+        <section>
+            <ul>
+                <li>computed vs methods</li>
+                <li>watch ?</li>
+            </ul>
+        </section>
+    </section>
+
+
+            
         </div>
     </div>
 
