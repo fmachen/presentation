@@ -48,7 +48,7 @@
                 <p>
                     <small>Présentation de
                         <a href="#">Florent Machen</a> pour
-                        <a href="http://www.recisio.com">Recisio</a> le 13/10/2017
+                        <a href="http://www.recisio.com">Recisio</a> le 23/10/2017
                     </small>
                 </p>
             </section>
@@ -311,7 +311,6 @@ new Vue({
                         </tr>
                     </table>
                 </section>
-
             </section>
 
             <section>
@@ -520,7 +519,6 @@ var vm = new Vue({
                         </tr>
                     </table>
                 </section>
-
             </section>
 
             <section>
@@ -567,13 +565,13 @@ setInterval(function(){ vm9.foobar = 'Nouveau texte'; }, 5000);
                     </table>
                 </section>
             </section>
-                    
+
             <section>
-                    <section>
-                <h2>option computed</h2>
-                <table>
-                    <tr>
-                        <td style="width:50%">
+                <section>
+                    <h2>option computed</h2>
+                    <table>
+                        <tr>
+                            <td style="width:50%">
 <pre><code>
 &lt;div id="vm10">&gt;
 &lt;p&gt;nom complet : {{ fullname }}&lt;/p&gt;
@@ -593,8 +591,8 @@ new Vue({
     }
 });      
 </code></pre>
-                        </td>
-                        <td style="width:50%; background:rgb(78, 136, 175)">
+                            </td>
+                            <td style="width:50%; background:rgb(78, 136, 175)">
 <div id="vm10">
 <p>nom complet : {{ fullname }}</p>
 </div>
@@ -611,16 +609,16 @@ var vm10 = new Vue({
     }
 });      
 </script>
-                        </td>
-                    </tr>
-                </table>
-        </section>
+                            </td>
+                        </tr>
+                    </table>
+                </section>
 
-        <section>
-            <h2>option computed v2</h2>
-            <table>
-                <tr>
-                    <td style="width:50%">
+                <section>
+                    <h2>option computed v2</h2>
+                    <table>
+                        <tr>
+                            <td style="width:50%">
 <pre><code>
 var vm11 = new Vue({
     el: '#vm11',
@@ -642,8 +640,8 @@ var vm11 = new Vue({
         }
     });      
 </code></pre>
-                    </td>
-                    <td style="width:50%; background:rgb(78, 136, 175)">
+                        </td>
+                        <td style="width:50%; background:rgb(78, 136, 175)">
 <form id="vm11">
     <div class="form-group">
         <input type="texte" class="form-control" v-model="fullname">
@@ -671,20 +669,26 @@ computed: {
     }
 });      
 </script>
-                    </td>
-                </tr>
-            </table>
-        </section>
+                            </td>
+                        </tr>
+                    </table>
+                </section>
 
-        <section>
-            <ul>
-                <li>computed vs methods</li>
-                <li>watch ?</li>
-            </ul>
-        </section>
-    </section>
+                <section>
+                    <ul>
+                        <li>computed vs methods</li>
+                        <li>watch ?</li>
+                    </ul>
+                </section>
+            </section>
 
-
+            <section>
+                <ul>
+                    <li>transitions</li>
+                    <li>composants</li>
+                    <li>routage</li>
+                </ul>
+            </section>
             
         </div>
     </div>
