@@ -433,7 +433,8 @@ new Vue({
                             <td style="width:50%; background:rgb(78, 136, 175)">
 <div id="vm7">
     <li v-for="(value, index) in fruits"
-        @click="getFruit(index)">
+        @click="getFruit(index)"
+        :key=index>
         {{ index }} => {{ value }}
     </li>
 </div>
@@ -684,9 +685,11 @@ computed: {
 
             <section>
                 <ul>
-                    <li>transitions</li>
+                    <li><a href="https://fr.vuejs.org/v2/guide/instance.html#Diagramme-du-cycle-de-vie">cycle de vie</a></li>
+                    <li>custom event</li>
                     <li>composants</li>
                     <li>routage</li>
+                    <li>transitions</li>
                 </ul>
             </section>
             
